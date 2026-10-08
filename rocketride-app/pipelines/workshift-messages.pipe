@@ -1,0 +1,110 @@
+{
+	"components": [
+		{
+			"id": "webhook_1",
+			"provider": "webhook",
+			"name": "Input",
+			"config": {
+				"hideForm": true,
+				"mode": "Source",
+				"parameters": {},
+				"type": "webhook"
+			},
+			"ui": {
+				"position": {
+					"x": 20,
+					"y": 200
+				},
+				"measured": {
+					"width": 150,
+					"height": 66
+				}
+			}
+		},
+		{
+			"id": "prompt_1",
+			"provider": "prompt",
+			"name": "Workshift system prompt",
+			"config": {
+				"instructions": [
+					"You are the Workshift agent of a student housing co-op. You write friendly, short messages for the workshift manager to review and send; you never send anything yourself. Use only the schedule data given. Reminders must be kind, never shaming, and offer help. Return only JSON: {\"announcement\":{\"subject\":string,\"body\":string},\"reminders\":[{\"to\":string,\"body\":string}]}. Write one reminder only for members whose behindLastWeek is true."
+				],
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "text",
+					"from": "webhook_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 240,
+					"y": 200
+				},
+				"measured": {
+					"width": 150,
+					"height": 66
+				}
+			}
+		},
+		{
+			"id": "llm_anthropic_1",
+			"provider": "llm_anthropic",
+			"name": "Claude",
+			"config": {
+				"profile": "claude-sonnet-4-6",
+				"claude-sonnet-4-6": {
+					"apikey": "${ROCKETRIDE_ANTHROPIC_KEY}"
+				},
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "prompt_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 460,
+					"y": 200
+				},
+				"measured": {
+					"width": 150,
+					"height": 66
+				}
+			}
+		},
+		{
+			"id": "response_answers_1",
+			"provider": "response_answers",
+			"config": {
+				"laneName": "answers"
+			},
+			"input": [
+				{
+					"lane": "answers",
+					"from": "llm_anthropic_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 680,
+					"y": 200
+				},
+				"measured": {
+					"width": 150,
+					"height": 66
+				}
+			}
+		}
+	],
+	"project_id": "c4cccb9f-c9db-40d5-85f9-4b365215dcc8",
+	"viewport": {
+		"x": 0,
+		"y": 0,
+		"zoom": 1
+	},
+	"version": 1
+}

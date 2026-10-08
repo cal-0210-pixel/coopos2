@@ -1,0 +1,7 @@
+node_modules/
+dist/
+
+# never commit or upload real co-op data
+*.xlsx
+*.xls
+*.csv

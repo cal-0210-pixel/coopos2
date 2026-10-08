@@ -1,0 +1,110 @@
+{
+	"components": [
+		{
+			"id": "webhook_1",
+			"provider": "webhook",
+			"name": "Input",
+			"config": {
+				"hideForm": true,
+				"mode": "Source",
+				"parameters": {},
+				"type": "webhook"
+			},
+			"ui": {
+				"position": {
+					"x": 20,
+					"y": 200
+				},
+				"measured": {
+					"width": 150,
+					"height": 66
+				}
+			}
+		},
+		{
+			"id": "prompt_1",
+			"provider": "prompt",
+			"name": "Compliance system prompt",
+			"config": {
+				"instructions": [
+					"You are the Bylaws & Compliance agent of a student housing co-op. You check a proposal against the bylaws. Never invent bylaw text: every quote must be copied EXACTLY from the bylaws. If unsure, use status UNCLEAR. Return only JSON: {\"checks\":[{\"rule\":string,\"status\":\"PASS\"|\"FAIL\"|\"UNCLEAR\",\"section\":string|null,\"quote\":string|null,\"explanation\":string}]}. Always cover: Who can propose, Notice period, Quorum, Vote threshold, plus any committee review or other rule that applies."
+				],
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "text",
+					"from": "webhook_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 240,
+					"y": 200
+				},
+				"measured": {
+					"width": 150,
+					"height": 66
+				}
+			}
+		},
+		{
+			"id": "llm_anthropic_1",
+			"provider": "llm_anthropic",
+			"name": "Claude",
+			"config": {
+				"profile": "claude-sonnet-4-6",
+				"claude-sonnet-4-6": {
+					"apikey": "${ROCKETRIDE_ANTHROPIC_KEY}"
+				},
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "prompt_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 460,
+					"y": 200
+				},
+				"measured": {
+					"width": 150,
+					"height": 66
+				}
+			}
+		},
+		{
+			"id": "response_answers_1",
+			"provider": "response_answers",
+			"config": {
+				"laneName": "answers"
+			},
+			"input": [
+				{
+					"lane": "answers",
+					"from": "llm_anthropic_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 680,
+					"y": 200
+				},
+				"measured": {
+					"width": 150,
+					"height": 66
+				}
+			}
+		}
+	],
+	"project_id": "73113ce0-40e9-42f5-b3b3-e8fd3a937864",
+	"viewport": {
+		"x": 0,
+		"y": 0,
+		"zoom": 1
+	},
+	"version": 1
+}

@@ -1,0 +1,18 @@
+{
+  "name": "coopos-rocketride",
+  "version": "0.4.0",
+  "private": true,
+  "description": "CoopOS: an AI back office for student housing co-ops, built on RocketRide.",
+  "scripts": {
+    "validate": "rocketride validate \"pipelines/*.pipe\"",
+    "check:governance": "node --env-file=.env --experimental-strip-types scripts/check-governance.ts",
+    "check:workshift": "node --env-file=.env --experimental-strip-types scripts/check-workshift.ts",
+    "check:house": "node --experimental-strip-types scripts/check-house.ts"
+  },
+  "dependencies": {
+    "rocketride": "file:.rocketride/client/rocketride.tgz"
+  },
+  "devDependencies": {
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  }
+}

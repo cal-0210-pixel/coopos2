@@ -1,0 +1,48 @@
+{
+  "name": "coopos_lab-coopos",
+  "version": "0.4.0",
+  "private": true,
+  "description": "AI back office for student housing co-ops: bylaw check and GA drafts, fair weekly workshifts, and a house dashboard that reads the workshift spreadsheet in your browser.",
+  "license": "MIT",
+  "appManifest": {
+    "id": "coopos_lab.coopos",
+    "publisher": "CoopOS",
+    "name": "CoopOS",
+    "description": "AI back office for student housing co-ops: bylaw check and GA drafts, fair weekly workshifts, and a house dashboard that reads the workshift spreadsheet in your browser.",
+    "icon": "./icon.svg",
+    "readme": "./README.md",
+    "categories": [
+      "productivity"
+    ],
+    "mode": "free",
+    "authenticated": false,
+    "include": [
+      "pipelines/compliance.pipe",
+      "pipelines/governance.pipe",
+      "pipelines/availability.pipe",
+      "pipelines/workshift-messages.pipe"
+    ]
+  },
+  "scripts": {
+    "dev": "rsbuild dev",
+    "build": "tsc --noEmit && rsbuild build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rocketride": "file:../../.rocketride/client/rocketride.tgz",
+    "shell": "file:../../.rocketride/shell/shell.tgz",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  },
+  "devDependencies": {
+    "@module-federation/rsbuild-plugin": "2.5.1",
+    "@rsbuild/core": "~2.0.11",
+    "@rsbuild/plugin-react": "~2.0.1",
+    "@types/node": "^20.19.41",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "react-refresh": "^0.14.2",
+    "typescript": "^5.3.0"
+  }
+}

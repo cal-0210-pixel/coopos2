@@ -1,0 +1,30 @@
+# Secrets: connection keys and any file holding keys or tokens
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.token
+*secret*
+*credentials*
+.npmrc
+
+# RocketRide workspace files (vendored platform packages, synced docs and catalog)
+.rocketride/
+
+# Dependencies and build output
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+pnpm-lock.yaml
+
+# Never commit real co-op data
+*.xlsx
+*.xls
+*.csv
+
+# OS / editor
+.DS_Store
